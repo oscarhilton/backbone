@@ -1,14 +1,19 @@
-var React = require("react");
-var Nav = require("Nav");
+import React, {PropTypes} from 'react';
+import Nav from './common/Nav';
 
-var Main = (props) =>{
-       return (
+class Main extends React.Component {
+    render() {
+        return (
             <div>
-                <h1>Main</h1>
                 <Nav />
-                {props.children}
+                {this.props.children}
             </div>
-    );
- } 
+        );
+    }
+}
 
-module.exports = Main;
+Main.propTypes = {
+    children: PropTypes.object.isRequired
+};
+
+export default Main;

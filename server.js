@@ -12,7 +12,7 @@ db.once('open', function() {
 });
 
 
-//Use BodyParser
+//Use BodyParser for API
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -48,13 +48,13 @@ router.route('/products')
         product.price       = req.body.price;
         product.stock       = req.body.stock;
         
-        product.save(function(err)
+        product.save(function(err, product)
         {
           if(err){
             res.send(err);
           }
           
-          res.json({ message : "Product created!" });
+          res.json(product);
             
         });
       })

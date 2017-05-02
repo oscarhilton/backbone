@@ -1,21 +1,23 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var {Route, Router, IndexRoute, hashHistory} = require("react-router");
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-var Main = require("Main");
-var Products = require("Products");
-var DisplayProducts = require("DisplayProducts");
+import configureStore from './store/configureStore';
+import {Provider} from 'react-redux';
+import {Route, Router, IndexRoute, hashHistory} from "react-router";
+import routes from './routes';
+
+
+import {loadProducts} from './actions/productActions';
+// import Main from './components/Main';
+// import HomePage from "./components/home/HomePage";
+// import Products from "./components/products/ProductsPage";
+const store = configureStore();
+store.dispatch(loadProducts());
 
     ReactDOM.render(
-        <Router history={hashHistory}>
-            <Route path="/" component={Main}>
-            </Route>
-            <Route path="/products" component={Products}>
-            <IndexRoute component={DisplayProducts} />
-            </Route>
-        </Router>,
+        <Provider store={store}>
+            <Router history={hashHistory} routes={routes} />
+        </Provider>,
         document.getElementById('app')
      );
-     
-require("./redux-example.jsx");
      

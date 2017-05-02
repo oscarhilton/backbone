@@ -1,12 +1,11 @@
 var axios = require("axios");
 
-const PRODCUTS_API = "https://backbone-oscarhilton.c9users.io/api/products";
+const PRODUCTS_API = "https://backbone-oscarhilton.c9users.io/api/products";
 
-module.exports = {
+class ProductApi {
     
-    getProducts: function(){
-        
-        var requestUrl = PRODCUTS_API;
+    static getProducts() {
+        var requestUrl = PRODUCTS_API;
     
         return axios.get(requestUrl)
             .then(function(res){
@@ -16,21 +15,36 @@ module.exports = {
             }, function(res) {
                 throw new Error(res);
             });
-    },
-    getProduct: function (id){
-        var requestUrl = `${PRODCUTS_API}/${id}`;
-        
-        return axios.get(requestUrl)
-        
-            .then(function(res){
-            
-            console.log(res);
-            return {
-                results: res
-            };
-            
-        }, function(res) {
-            throw new Error(res.data.message);
-        });
     }
+    
+    static createProduct(product) {
+        var requestUrl = PRODUCTS_API;
+    
+        return axios.post(requestUrl, product)
+            .then(function(res){
+                return{
+                    results: res.data
+                };
+            }, function(res) {
+                throw new Error(res);
+            });
+    }
+    
+    static deleteProduct(product) {
+        var requestUrl = PRODUCTS_API;
+    
+        return axios.post(requestUrl, {
+            _id: product
+        })
+            .then(function(res){
+                return{
+                    results: res.data
+                };
+            }, function(res) {
+                throw new Error(res);
+            });
+    }
+    
 }
+
+export default ProductApi;

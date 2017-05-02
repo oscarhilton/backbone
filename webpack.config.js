@@ -9,7 +9,7 @@ module.exports = {
       alias: {
           ProductApi : 'app/api/ProductApi.jsx',
           Main: 'app/components/Main.jsx',
-          Nav: 'app/components/Nav.jsx',
+          Nav: 'app/components/common/Nav.jsx',
           Products: 'app/components/Products.jsx',
           DisplayProducts: 'app/components/DisplayProducts.jsx'
       },
